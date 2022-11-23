@@ -52,6 +52,17 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Default",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddServices(builder.Configuration);
 builder.Services.AddMvc().AddJsonOptions(options =>
@@ -84,6 +95,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 
