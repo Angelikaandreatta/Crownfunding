@@ -19,16 +19,16 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public async Task<ResultService<PessoaDto>> CreateAsync(PessoaDto pessoaDTO)
+        public async Task<ResultService<PessoaDto>> CreateAsync(PessoaDto pessoaDto)
         {
-            if (pessoaDTO == null)
+            if (pessoaDto == null)
                 return ResultService.Fail<PessoaDto>("Objeto deve ser informado");
 
-            var result = new PessoaDtoValidator().Validate(pessoaDTO);
+            var result = new PessoaDtoValidator().Validate(pessoaDto);
             if (!result.IsValid)
                 return ResultService.RequestError<PessoaDto>("Problema de validacao!", result);
 
-            var person = _mapper.Map<Pessoa>(pessoaDTO);
+            var person = _mapper.Map<Pessoa>(pessoaDto);
             var data = await _pessoaRepository.CreateAsync(person);
             return ResultService.Ok<PessoaDto>(_mapper.Map<PessoaDto>(data));
         }
@@ -55,20 +55,20 @@ namespace Application.Services
             return ResultService.Ok($"Pessoa do id:{id} deletada");
         }
 
-        public async Task<ResultService> UpdateAsync(PessoaDto pessoaDTO)
+        public async Task<ResultService> UpdateAsync(PessoaDto pessoaDto)
         {
-            if (pessoaDTO == null)
+            if (pessoaDto == null)
                 return ResultService.Fail<PessoaDto>("Objeto deve ser informado");
 
-            var validation = new PessoaDtoValidator().Validate(pessoaDTO);
+            var validation = new PessoaDtoValidator().Validate(pessoaDto);
             if (!validation.IsValid)
                 return ResultService.RequestError<PessoaDto>("Problema de validacao!", validation);
 
-            var person = await _pessoaRepository.GetByIdAsync(pessoaDTO.Id);
+            var person = await _pessoaRepository.GetByIdAsync(pessoaDto.Id);
             if (person == null)
                 return ResultService.Fail("Pessoa não encontrada!");
 
-            person = _mapper.Map<PessoaDto, Pessoa>(pessoaDTO, person);
+            person = _mapper.Map<PessoaDto, Pessoa>(pessoaDto, person);
             await _pessoaRepository.EditAsync(person);
             return ResultService.Ok("Pessoa editada");
         }
