@@ -8,7 +8,7 @@ namespace Application.Mappings
     {
         public DomainToDtoMapping()
         {
-            CreateMap<Categoria, CategoriaDto>();
+            CreateMap<Projeto, ProjetoDto>();
         }
     }
 }

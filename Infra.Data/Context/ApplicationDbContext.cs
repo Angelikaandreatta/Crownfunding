@@ -7,8 +7,7 @@ namespace Infra.Data.Context
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
-
-        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Projeto> Projetos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
