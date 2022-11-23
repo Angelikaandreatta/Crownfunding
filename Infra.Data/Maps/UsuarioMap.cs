@@ -16,14 +16,11 @@ namespace Infra.Data.Maps
                 .HasColumnName("Id")
                 .UseIdentityColumn();
 
-            builder.Property(c => c.Nome)
-                .HasColumnName("Nome");
-
             builder.Property(c => c.Email)
                 .HasColumnName("Email");
 
-            builder.Property(c => c.Telefone)
-               .HasColumnName("Telefone");
+            builder.Property(c => c.Senha)
+               .HasColumnName("Senha");
         }
     }
 }

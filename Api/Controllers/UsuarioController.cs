@@ -17,55 +17,13 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync([FromBody] UsuarioDto usuarioDto)
+        [Route("token")]
+        public async Task<ActionResult> PostAsync([FromForm] UsuarioDto usuarioDto)
         {
-            var result = _usuarioService.Create(usuarioDto);
-            if (result.IsCompletedSuccessfully)
-                return Ok(result);
+            var result = await _usuarioService.GenerateTokenAsync(usuarioDto);
 
-            return BadRequest(result);
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GetAsync()
-        {
-            var result = await _usuarioService.GetAsync();
-
-            if (result.IsSucess)
-                return Ok(result);
-
-            return BadRequest(result);
-        }
-
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult> GetByIdAsync(int id)
-        {
-            var result = await _usuarioService.GetByIdAsync(id);
-
-            if (result.IsSucess)
-                return Ok(result);
-
-            return BadRequest(result);
-        }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] UsuarioDto usuarioDto)
-        {
-            var result = _usuarioService.UpdateAsync(usuarioDto);
-            if (result.IsCompletedSuccessfully)
-                return Ok(result);
-
-            return BadRequest(result);
-        }
-
-        [HttpDelete]
-        [Route("{id}")]
-        public async Task<ActionResult> DeleteAsync(int id)
-        {
-            var result = _usuarioService.DeleteAsync(id);
-            if (result.IsCompletedSuccessfully)
-                return Ok(result);
+            if (result.IsSuccess)
+                return Ok(result.Data);
 
             return BadRequest(result);
         }

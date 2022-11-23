@@ -10,6 +10,7 @@ namespace Application.Mappings
         {
             CreateMap<Projeto, ProjetoDto>();
             CreateMap<Usuario, UsuarioDto>();
+            CreateMap<Pessoa, PessoaDto>();
         }
     }
 }

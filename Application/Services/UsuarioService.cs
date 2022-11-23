@@ -1,10 +1,8 @@
 ﻿using Application.DTOs;
 using Application.DTOs.Validations;
 using Application.Services.Interfaces;
-using AutoMapper;
-using Domain.Entities;
+using Domain.Authentication;
 using Domain.Repositories;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Application.Services
@@ -12,79 +10,30 @@ namespace Application.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly IMapper _mapper;
+        private readonly ITokenGenerator _tokenGenerator;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
+        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenGenerator tokenGenerator)
         {
             _usuarioRepository = usuarioRepository;
-            _mapper = mapper;
+            _tokenGenerator = tokenGenerator;
         }
 
-        public async Task<ResultService<UsuarioDto>> Create(UsuarioDto usuarioDto)
+        public async Task<ResultService<dynamic>> GenerateTokenAsync(UsuarioDto usuarioDto)
         {
-            if (usuarioDto
-                == null)
-                return ResultService.Fail<UsuarioDto>("Objeto deve ser informado");
+            if (usuarioDto == null)
+                return ResultService.Fail<dynamic>("Objeto deve ser informado");
 
-            var result = new UsuarioDtoValidator().Validate(usuarioDto);
+            var validator = new UsuarioDtoValidator().Validate(usuarioDto);
 
-            if (!result.IsValid)
-                return ResultService.RequestError<UsuarioDto>("Problemas de validação", result);
+            if (!validator.IsValid)
+                return ResultService.RequestError<dynamic>("Problemas de validação", validator);
 
-            var usuario = _mapper.Map<Usuario>(usuarioDto);
-            var data = _usuarioRepository.CreateAsync(usuario);
-
-            return ResultService.Ok<UsuarioDto>(_mapper.Map<UsuarioDto>(data));
-        }
-
-        public async Task<ResultService> DeleteAsync(int id)
-        {
-            var usuario = await _usuarioRepository.GetByIdAsync(id);
+            var usuario = await _usuarioRepository.GetUsuarioByEmailandSenhaAsync(usuarioDto.Email, usuarioDto.Senha);
 
             if (usuario == null)
-                return ResultService.Fail("Projeto não encontrado.");
+                return ResultService.Fail<dynamic>("Usuario ou senha não encontrados");
 
-            await _usuarioRepository.DeleteAsync(usuario);
-            return ResultService.Ok("Projeto deletado.");
-        }
-
-        public async Task<ResultService<ICollection<UsuarioDto>>> GetAsync()
-        {
-            var usuario = await _usuarioRepository.GetUsuarioAsync();
-            return ResultService.Ok<ICollection<UsuarioDto>>(_mapper.Map<ICollection<UsuarioDto>>(usuario));
-        }
-
-        public async Task<ResultService<UsuarioDto>> GetByIdAsync(int id)
-        {
-            var usuario = await _usuarioRepository.GetByIdAsync(id);
-
-            if (usuario == null)
-                return ResultService.Fail<UsuarioDto>("Projeto não encontrado");
-
-            return ResultService.Ok(_mapper.Map<UsuarioDto>(usuario));
-        }
-
-        public async Task<ResultService> UpdateAsync(UsuarioDto usuarioDto)
-        {
-            if (usuarioDto
-                == null)
-                return ResultService.Fail("Objeto deve ser informado.");
-
-            var validation = new UsuarioDtoValidator().Validate(usuarioDto
-                );
-
-            if (!validation.IsValid)
-                return ResultService.RequestError("Problema com a validação dos campos.", validation);
-
-            var usuario = await _usuarioRepository.GetByIdAsync(usuarioDto
-                .Id);
-            if (usuario == null)
-                return ResultService.Fail("Usu não encontrado.");
-
-            usuario = _mapper.Map<UsuarioDto, Usuario>(usuarioDto, usuario);
-            await _usuarioRepository.EditAsync(usuario);
-
-            return ResultService.Ok("Projeto editado com sucesso.");
+            return ResultService.Ok(_tokenGenerator.Generator(usuario));
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-using Domain.Enuns;
+﻿using Domain.Enuns;
 
 namespace Application.DTOs
 {

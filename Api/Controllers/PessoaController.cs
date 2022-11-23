@@ -1,36 +1,38 @@
 ﻿using Application.DTOs;
 using Application.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjetoController : ControllerBase
+    public class PessoaController : ControllerBase
     {
-        private readonly IProjetoService _projetoService;
+        private readonly IPessoaService _pessoaService;
 
-        public ProjetoController(IProjetoService projetoService)
+        public PessoaController(IPessoaService pessoaService)
         {
-            _projetoService = projetoService;
+            _pessoaService = pessoaService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync([FromBody] ProjetoDto projetoDto)
+        public async Task<ActionResult> PostAsync([FromBody] PessoaDto pessoaDto)
         {
-            var result = _projetoService.Create(projetoDto);
-            if (result.IsCompletedSuccessfully)
+            var result = await _pessoaService.CreateAsync(pessoaDto);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
         }
 
         [HttpGet]
+
         public async Task<ActionResult> GetAsync()
         {
-            var result = await _projetoService.GetAsync();
-
+            var result = await _pessoaService.GetAsync();
             if (result.IsSuccess)
                 return Ok(result);
 
@@ -39,10 +41,9 @@ namespace Api.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<ActionResult> GetByIdAsync(int id)
+        public async Task<ActionResult> GetIdAsync(int id)
         {
-            var result = await _projetoService.GetByIdAsync(id);
-
+            var result = await _pessoaService.GetByIdAsync(id);
             if (result.IsSuccess)
                 return Ok(result);
 
@@ -50,10 +51,10 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] ProjetoDto projetoDto)
+        public async Task<ActionResult> UpdateAsync([FromBody] PessoaDto pessoaDto)
         {
-            var result = _projetoService.UpdateAsync(projetoDto);
-            if (result.IsCompletedSuccessfully)
+            var result = await _pessoaService.UpdateAsync(pessoaDto);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
@@ -63,11 +64,12 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = _projetoService.DeleteAsync(id);
-            if (result.IsCompletedSuccessfully)
+            var result = await _pessoaService.RemoveAsync(id);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
         }
     }
 }
+

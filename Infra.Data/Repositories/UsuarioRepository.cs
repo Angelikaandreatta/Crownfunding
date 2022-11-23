@@ -2,7 +2,6 @@
 using Domain.Repositories;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Infra.Data.Repositories
@@ -16,33 +15,9 @@ namespace Infra.Data.Repositories
             _db = db;
         }
 
-        public async Task<Usuario> CreateAsync(Usuario usuario)
+        public async Task<Usuario> GetUsuarioByEmailandSenhaAsync(string email, string senha)
         {
-            _db.Add(usuario);
-            await _db.SaveChangesAsync();
-            return usuario;
-        }
-
-        public async Task DeleteAsync(Usuario usuario)
-        {
-            _db.Remove(usuario);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task EditAsync(Usuario usuario)
-        {
-            _db.Update(usuario);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task<Usuario> GetByIdAsync(int id)
-        {
-            return await _db.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<ICollection<Usuario>> GetUsuarioAsync()
-        {
-            return await _db.Usuarios.ToListAsync();
+            return await _db.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);
         }
     }
 }
