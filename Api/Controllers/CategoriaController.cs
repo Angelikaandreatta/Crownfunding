@@ -6,19 +6,19 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VeiculoController : ControllerBase
+    public class CategoriaController : ControllerBase
     {
-        private readonly IVeiculoService _veiculoService;
+        private readonly ICategoriaService _categoriaService;
 
-        public VeiculoController(IVeiculoService veiculoService)
+        public CategoriaController(ICategoriaService categoriaService)
         {
-            _veiculoService = veiculoService;
+            _categoriaService = categoriaService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync([FromBody] VeiculoDto veiculoDto)
+        public async Task<ActionResult> CreateAsync([FromBody] CategoriaDto categoriaDto)
         {
-            var result = _veiculoService.Create(veiculoDto);
+            var result = _categoriaService.Create(categoriaDto);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 
@@ -28,7 +28,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var result = await _veiculoService.GetAsync();
+            var result = await _categoriaService.GetAsync();
 
             if (result.IsSucess)
                 return Ok(result);
@@ -40,7 +40,7 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> GetByIdAsync(int id)
         {
-            var result = await _veiculoService.GetByIdAsync(id);
+            var result = await _categoriaService.GetByIdAsync(id);
 
             if (result.IsSucess)
                 return Ok(result);
@@ -49,9 +49,9 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] VeiculoDto veiculoDto)
+        public async Task<ActionResult> UpdateAsync([FromBody] CategoriaDto categoriaDto)
         {
-            var result = _veiculoService.UpdateAsync(veiculoDto);
+            var result = _categoriaService.UpdateAsync(categoriaDto);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 
@@ -62,7 +62,7 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = _veiculoService.DeleteAsync(id);
+            var result = _categoriaService.DeleteAsync(id);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 

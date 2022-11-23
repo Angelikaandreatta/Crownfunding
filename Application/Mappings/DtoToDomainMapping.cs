@@ -8,7 +8,7 @@ namespace Application.Mappings
     {
         public DtoToDomainMapping()
         {
-            CreateMap<VeiculoDto, Veiculo>();
+            CreateMap<CategoriaDto, Categoria>();
         }
     }
 }

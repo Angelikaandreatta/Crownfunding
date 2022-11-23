@@ -15,7 +15,7 @@ namespace Infra.Ioc
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContextFactory<ApplicationDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
             return services;
         }
 
@@ -23,7 +23,7 @@ namespace Infra.Ioc
         {
             services.AddAutoMapper(typeof(DomainToDtoMapping));
             services.AddAutoMapper(typeof(DtoToDomainMapping));
-            services.AddScoped<IVeiculoService, VeiculoService>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
             return services;
         }
     }
