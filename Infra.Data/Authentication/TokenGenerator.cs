@@ -20,7 +20,7 @@ namespace Infra.Data.Authentication
            };
 
             var expires = DateTime.Now.AddDays(1);
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("senhaaleatoria"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("CF1594AE3296119A"));
             var tokenData = new JwtSecurityToken(
                 signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
                 expires: expires,
