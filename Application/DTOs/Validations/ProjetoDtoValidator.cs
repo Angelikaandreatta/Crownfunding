@@ -21,10 +21,15 @@ namespace Application.DTOs.Validations
                .NotNull()
                .WithMessage("Links deve ser informado.");
 
-            RuleFor(x => x.MetaFinanceira)
+            RuleFor(x => x.Meta)
                .NotEmpty()
                .NotNull()
                .WithMessage("Meta financeira deve ser informada.");
+
+            RuleFor(x => x.Categoria)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage("Categoria deve ser informada.");
         }
     }
 }

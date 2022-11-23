@@ -7,19 +7,19 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjetoController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
-        private readonly IProjetoService _projetoService;
+        private readonly IUsuarioService _usuarioService;
 
-        public ProjetoController(IProjetoService projetoService)
+        public UsuarioController(IUsuarioService usuarioService)
         {
-            _projetoService = projetoService;
+            _usuarioService = usuarioService;
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateAsync([FromBody] ProjetoDto projetoDto)
+        public async Task<ActionResult> CreateAsync([FromBody] UsuarioDto usuarioDto)
         {
-            var result = _projetoService.Create(projetoDto);
+            var result = _usuarioService.Create(usuarioDto);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 
@@ -29,7 +29,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var result = await _projetoService.GetAsync();
+            var result = await _usuarioService.GetAsync();
 
             if (result.IsSucess)
                 return Ok(result);
@@ -41,7 +41,7 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> GetByIdAsync(int id)
         {
-            var result = await _projetoService.GetByIdAsync(id);
+            var result = await _usuarioService.GetByIdAsync(id);
 
             if (result.IsSucess)
                 return Ok(result);
@@ -50,9 +50,9 @@ namespace Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync([FromBody] ProjetoDto projetoDto)
+        public async Task<ActionResult> UpdateAsync([FromBody] UsuarioDto usuarioDto)
         {
-            var result = _projetoService.UpdateAsync(projetoDto);
+            var result = _usuarioService.UpdateAsync(usuarioDto);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 
@@ -63,7 +63,7 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = _projetoService.DeleteAsync(id);
+            var result = _usuarioService.DeleteAsync(id);
             if (result.IsCompletedSuccessfully)
                 return Ok(result);
 

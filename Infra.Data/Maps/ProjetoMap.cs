@@ -19,23 +19,23 @@ namespace Infra.Data.Maps
             builder.Property(c => c.Nome)
                 .HasColumnName("Nome");
 
-            builder.Property(c => c.Nome)
+            builder.Property(c => c.Descricao)
                 .HasColumnName("Descricao");
-
-            builder.Property(c => c.ImagemPerfil)
-                .HasColumnName("Imagemperfil");
-
-            builder.Property(c => c.ImagemCapa)
-                .HasColumnName("Imagemcapa");
 
             builder.Property(c => c.Links)
                .HasColumnName("Links");
 
-            builder.Property(c => c.MetaFinanceira)
-               .HasColumnName("Metafinanceira");
+            builder.Property(c => c.ImagemPerfil)
+               .HasColumnName("Imagemperfil");
+
+            builder.Property(c => c.ImagemCapa)
+               .HasColumnName("Imagemcapa");
+
+            builder.Property(c => c.Meta)
+               .HasColumnName("Meta");
 
             builder.Property(c => c.Categoria)
-                           .HasColumnName("Categoria");
+               .HasColumnName("Categoria");
         }
     }
 }

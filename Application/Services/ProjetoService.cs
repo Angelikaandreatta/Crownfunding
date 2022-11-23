@@ -4,6 +4,8 @@ using Application.Services.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Repositories;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {

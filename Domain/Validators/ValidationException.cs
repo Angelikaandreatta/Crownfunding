@@ -1,4 +1,6 @@
-﻿namespace Domain.Validators
+﻿using System;
+
+namespace Domain.Validators
 {
     public class ValidationException : Exception
     {
