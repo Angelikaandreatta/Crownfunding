@@ -18,8 +18,9 @@ namespace Infra.Data.Repositories
 
         public async Task<Projeto> CreateAsync(Projeto projeto)
         {
-            _db.Add(projeto);
+            await _db.AddAsync(projeto);
             await _db.SaveChangesAsync();
+
             return projeto;
         }
 

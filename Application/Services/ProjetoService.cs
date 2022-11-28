@@ -31,7 +31,7 @@ namespace Application.Services
                 return ResultService.RequestError<ProjetoDto>("Problemas de validação", result);
 
             var projeto = _mapper.Map<Projeto>(projetoDto);
-            var data = _projetoRepository.CreateAsync(projeto);
+            var data = await _projetoRepository.CreateAsync(projeto);
 
             return ResultService.Ok<ProjetoDto>(_mapper.Map<ProjetoDto>(data));
         }

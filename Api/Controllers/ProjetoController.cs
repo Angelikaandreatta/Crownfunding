@@ -19,8 +19,8 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateAsync([FromBody] ProjetoDto projetoDto)
         {
-            var result = _projetoService.Create(projetoDto);
-            if (result.IsCompletedSuccessfully)
+            var result = await _projetoService.Create(projetoDto);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
