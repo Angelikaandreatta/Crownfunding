@@ -52,8 +52,8 @@ namespace Api.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromBody] ProjetoDto projetoDto)
         {
-            var result = _projetoService.UpdateAsync(projetoDto);
-            if (result.IsCompletedSuccessfully)
+            var result = await _projetoService.UpdateAsync(projetoDto);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
@@ -63,8 +63,8 @@ namespace Api.Controllers
         [Route("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = _projetoService.DeleteAsync(id);
-            if (result.IsCompletedSuccessfully)
+            var result = await _projetoService.DeleteAsync(id);
+            if (result.IsSuccess)
                 return Ok(result);
 
             return BadRequest(result);
