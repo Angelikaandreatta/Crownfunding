@@ -9,8 +9,6 @@ namespace Application.Mappings
         public DtoToDomainMapping()
         {
             CreateMap<ProjetoDto, Projeto>();
-            CreateMap<UsuarioDto, Usuario>();
-            CreateMap<PessoaDto, Pessoa>();
         }
     }
 }

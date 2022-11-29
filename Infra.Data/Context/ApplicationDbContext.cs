@@ -8,8 +8,6 @@ namespace Infra.Data.Context
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
         public DbSet<Projeto> Projetos { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Pessoa> Pessoas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
