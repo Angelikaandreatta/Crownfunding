@@ -44,7 +44,7 @@ namespace Application.Services
                 return ResultService.Fail("Projeto não encontrado.");
 
             await _projetoRepository.DeleteAsync(projeto);
-            return ResultService.Ok("Projeto deletado.");
+            return ResultService.Ok("Projeto deletado com sucesso.");
         }
 
         public async Task<ResultService<ICollection<ProjetoDto>>> GetAsync()
