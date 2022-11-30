@@ -50,7 +50,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("{email},{senha}")]
+        [Route("login")]
         public async Task<ActionResult> GetByLogin(string email, string senha)
         {
             var result = await _usuarioService.GetByLogin(email, senha);
