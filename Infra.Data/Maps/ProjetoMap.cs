@@ -13,29 +13,35 @@ namespace Infra.Data.Maps
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Id)
-                .HasColumnName("Id")
+                .HasColumnName("id")
                 .UseIdentityColumn();
 
+            builder.Property(c => c.IdUsuario)
+                .HasColumnName("idUsuario");
+
             builder.Property(c => c.Nome)
-                .HasColumnName("Nome");
+                .HasColumnName("nome");
 
             builder.Property(c => c.Descricao)
-                .HasColumnName("Descricao");
-
-            builder.Property(c => c.Links)
-               .HasColumnName("Links");
+                .HasColumnName("descricao");
 
             builder.Property(c => c.ImagemPerfil)
-               .HasColumnName("Imagemperfil");
-
-            builder.Property(c => c.ImagemCapa)
-               .HasColumnName("Imagemcapa");
-
-            builder.Property(c => c.Meta)
-               .HasColumnName("Meta");
+               .HasColumnName("imagemPerfil");
 
             builder.Property(c => c.Categoria)
-               .HasColumnName("Categoria");
+               .HasColumnName("categoria");
+
+            builder.Property(c => c.ImagemCapa)
+               .HasColumnName("imagemCapa");
+
+            builder.Property(c => c.Meta)
+               .HasColumnName("meta");
+
+            builder.Property(c => c.Links)
+               .HasColumnName("links");
+
+            builder.HasOne(c => c.Usuario)
+                .WithMany(a => a.Projeto);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Infra.Data.Repositories
             return await _db.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<ICollection<Usuario>> GetProjetoAsync()
+        public async Task<ICollection<Usuario>> GetUsuarioAsync()
         {
             return await _db.Usuarios.ToListAsync();
         }

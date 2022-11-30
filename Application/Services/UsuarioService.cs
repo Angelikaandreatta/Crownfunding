@@ -49,7 +49,7 @@ namespace Application.Services
 
         public async Task<ResultService<ICollection<UsuarioDto>>> GetAsync()
         {
-            var usuario = await _usuarioRepository.GetProjetoAsync();
+            var usuario = await _usuarioRepository.GetUsuarioAsync();
             return ResultService.Ok<ICollection<UsuarioDto>>(_mapper.Map<ICollection<UsuarioDto>>(usuario));
         }
 

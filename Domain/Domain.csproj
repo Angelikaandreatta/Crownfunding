@@ -7,7 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Folder Include="Authentication\" />
+	  <Compile Remove="Authentication\**" />
+	  <EmbeddedResource Remove="Authentication\**" />
+	  <None Remove="Authentication\**" />
 	</ItemGroup>
 
 </Project>

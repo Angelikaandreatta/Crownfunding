@@ -45,5 +45,10 @@ namespace Infra.Data.Repositories
         {
             return await _db.Projetos.ToListAsync();
         }
+
+        public async Task<int> GetUsuario(int codUsuario)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -27,6 +27,10 @@ namespace Infra.Data.Maps
 
             builder.Property(c => c.Senha)
                .HasColumnName("senha");
+
+            builder.HasMany(c => c.Projeto)
+                .WithOne(a => a.Usuario)
+                .HasForeignKey(c => c.IdUsuario);
         }
     }
 }

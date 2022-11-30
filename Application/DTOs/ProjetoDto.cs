@@ -5,6 +5,7 @@ namespace Application.DTOs
     public class ProjetoDto
     {
         public int Id { get; set; }
+        public int IdUsuario { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Links { get; set; }

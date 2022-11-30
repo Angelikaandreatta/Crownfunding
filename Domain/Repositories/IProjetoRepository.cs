@@ -11,5 +11,6 @@ namespace Domain.Repositories
         Task<Projeto> CreateAsync(Projeto projeto);
         Task EditAsync(Projeto projeto);
         Task DeleteAsync(Projeto projeto);
+        Task<int> GetUsuario(int codUsuario);
     }
 }
