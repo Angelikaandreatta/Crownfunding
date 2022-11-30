@@ -63,6 +63,16 @@ namespace Application.Services
             return ResultService.Ok(_mapper.Map<ProjetoDto>(projeto));
         }
 
+        public async Task<ResultService<ProjetoDto>> GetByIdUsuario(int idUsuario)
+        {
+            var projeto = await _projetoRepository.GetByIdUsuarioAsync(idUsuario);
+
+            if (projeto == null)
+                return ResultService.Fail<ProjetoDto>("Não existe nenhum projeto com este usuário.");
+
+            return ResultService.Ok(_mapper.Map<ProjetoDto>(projeto));
+        }
+
         public async Task<ResultService> UpdateAsync(ProjetoDto projetoDto)
         {
             if (projetoDto == null)

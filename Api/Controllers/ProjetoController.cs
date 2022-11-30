@@ -38,10 +38,22 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}/GetById")]
         public async Task<ActionResult> GetByIdAsync(int id)
         {
             var result = await _projetoService.GetByIdAsync(id);
+
+            if (result.IsSuccess)
+                return Ok(result);
+
+            return BadRequest(result);
+        }
+
+        [HttpGet]
+        [Route("{idUsuario}/GetByIdUsuario")]
+        public async Task<ActionResult> GetByIdUsuarioAsync(int idUsuario)
+        {
+            var result = await _projetoService.GetByIdUsuario(idUsuario);
 
             if (result.IsSuccess)
                 return Ok(result);
