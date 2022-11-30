@@ -8,6 +8,7 @@ namespace Application.Services.Interfaces
     {
         Task<ResultService<UsuarioDto>> Create(UsuarioDto usuarioDto);
         Task<ResultService<ICollection<UsuarioDto>>> GetAsync();
+        Task<ResultService<UsuarioDto>> GetByLogin(string email, string senha);
         Task<ResultService<UsuarioDto>> GetByIdAsync(int id);
         Task<ResultService> UpdateAsync(UsuarioDto usuarioDto);
         Task<ResultService> DeleteAsync(int id);

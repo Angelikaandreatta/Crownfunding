@@ -49,6 +49,18 @@ namespace Api.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet]
+        [Route("{email},{senha}")]
+        public async Task<ActionResult> GetByLogin(string email, string senha)
+        {
+            var result = await _usuarioService.GetByLogin(email, senha);
+
+            if (result.IsSuccess)
+                return Ok(result);
+
+            return BadRequest(result);
+        }
+
         [HttpPut]
         public async Task<ActionResult> UpdateAsync([FromBody] UsuarioDto usuarioDto)
         {

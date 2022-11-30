@@ -63,6 +63,16 @@ namespace Application.Services
             return ResultService.Ok(_mapper.Map<UsuarioDto>(usuario));
         }
 
+        public async Task<ResultService<UsuarioDto>> GetByLogin(string email, string senha)
+        {
+            var usuario = await _usuarioRepository.GetByLogin(email, senha);
+
+            if (usuario == null)
+                return ResultService.Fail<UsuarioDto>("Usuário não encontrado");
+
+            return ResultService.Ok(_mapper.Map<UsuarioDto>(usuario));
+        }
+
         public async Task<ResultService> UpdateAsync(UsuarioDto usuarioDto)
         {
             if (usuarioDto == null)

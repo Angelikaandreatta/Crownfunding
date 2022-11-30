@@ -42,6 +42,11 @@ namespace Infra.Data.Repositories
             return await _db.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<Usuario> GetByLogin(string email, string senha)
+        {
+            return await _db.Usuarios.FirstOrDefaultAsync(x => x.Email == email && x.Senha == senha);
+        }
+
         public async Task<ICollection<Usuario>> GetUsuarioAsync()
         {
             return await _db.Usuarios.ToListAsync();
