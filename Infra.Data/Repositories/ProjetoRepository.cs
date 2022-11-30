@@ -3,6 +3,7 @@ using Domain.Repositories;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infra.Data.Repositories
@@ -41,9 +42,10 @@ namespace Infra.Data.Repositories
             return await _db.Projetos.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<Projeto> GetByIdUsuarioAsync(int idUsuario)
+        public async Task<ICollection<Projeto>> GetByIdUsuarioAsync(int idUsuario)
         {
-            return await _db.Projetos.FirstOrDefaultAsync(x => x.IdUsuario == idUsuario);
+            var list = _db.Projetos.Where(x => x.IdUsuario == idUsuario);
+            return await list.ToListAsync();
         }
 
         public async Task<ICollection<Projeto>> GetProjetoAsync()

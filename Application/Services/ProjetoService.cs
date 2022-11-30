@@ -50,7 +50,7 @@ namespace Application.Services
         public async Task<ResultService<ICollection<ProjetoDto>>> GetAsync()
         {
             var projeto = await _projetoRepository.GetProjetoAsync();
-            return ResultService.Ok<ICollection<ProjetoDto>>(_mapper.Map<ICollection<ProjetoDto>>(projeto));
+            return ResultService.Ok(_mapper.Map<ICollection<ProjetoDto>>(projeto));
         }
 
         public async Task<ResultService<ProjetoDto>> GetByIdAsync(int id)
@@ -63,14 +63,14 @@ namespace Application.Services
             return ResultService.Ok(_mapper.Map<ProjetoDto>(projeto));
         }
 
-        public async Task<ResultService<ProjetoDto>> GetByIdUsuario(int idUsuario)
+        public async Task<ResultService<ICollection<ProjetoDto>>> GetByIdUsuario(int idUsuario)
         {
             var projeto = await _projetoRepository.GetByIdUsuarioAsync(idUsuario);
 
             if (projeto == null)
-                return ResultService.Fail<ProjetoDto>("Não existe nenhum projeto com este usuário.");
+                return ResultService.Fail<ICollection<ProjetoDto>>("Não existe nenhum projeto com este usuário.");
 
-            return ResultService.Ok(_mapper.Map<ProjetoDto>(projeto));
+            return ResultService.Ok(_mapper.Map<ICollection<ProjetoDto>>(projeto));
         }
 
         public async Task<ResultService> UpdateAsync(ProjetoDto projetoDto)
